@@ -1,4 +1,5 @@
 h2. Om
+
 Det här är ett program som är gjort att fungera som ett komplement till
 ipredkoll.se och specifikt genom att logga de IP-adresserna du använder
 för att ansluta med till internet. Det för att om Maafian kommer och vill
@@ -16,6 +17,7 @@ Om du vill komma i kontakt med mej så kan du skicka ett e-post till
 ba@sanitarium.se eller så kan du hitta mej på irc.piratpartiet.se nick ba.
 
 h2. Deps
+
 Det här är skrivet med Ruby och använder några olika gems för utökning, då
 främst amalgalite för att få in SQLite3-databas enkelt eftersom målet är
 att kunna fixa i ordning en lättinstallerbar version till Windows.
@@ -25,6 +27,7 @@ och installera alla gems:
   @gem install amalgalite daemons arrayfields@
 
 h2. Hur programmet arbetar
+
 Var 15:e minut så försöker det ta reda på vad du har för IP-adress, om du
 sitter NAT:ad så kommer den att använda en extern tjänst, myip.dk, för att
 ta reda på ditt IP. Förslag på bättre lösningar mottages tacksamt! :)
@@ -38,6 +41,7 @@ skickas via de notifiers du har aktiverat. I nuläget finns bara en men det
 kommer att komma fler.
 
 h2. Utöka med egna notifiers
+
 För att utöka med en egen notifier så behöver du bara skriva en klass under
 modulerna @IPREDkoll::Notifiers@. För ett exempel på en enkel notifier så se
 @notifier.rb@ och @Logger@.
