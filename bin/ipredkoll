@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+$KCODE = 'u'
+
+$:.unshift(File.join(File.dirname(__FILE__), '..'))
+require 'rubygems'
+require 'daemons'
+
+['configuration', 'ip', 'daemon', 'db', 'notifiers'].each {|x| require File.join('lib', x) }
+
+Daemons.run_proc('ipredkoll') do
+  IPREDkoll::Config = IPREDkoll::Configuration.load
+  IPREDkoll::Daemon.new
+end

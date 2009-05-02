@@ -1,0 +1,26 @@
+This is a program made to function as an extension to ipredkoll.se and namely
+by logging the IP you have at your computer. This is so you know whether
+you've had an address at any given time if the maafia comes for you.
+
+At the moment this is ALPHA grade software and I still miss the piece most
+important piece; getting the data from ipredkoll.se but other basic
+functionality exists:
+
+1) The program checks your IP every 15 mins and logs it to a database.
+   At the moment we check the IP by using an external service (myip.dk),
+   but I'm hoping to find a better solution.
+2) If there is any matches in the database from ipredkoll.se we notify you
+   by the methods that you've specified in your configuration file.
+
+   This system is expandable and if you just write your own class under the
+   IPREDkoll::Notifiers module. Please look at notifiers.rb for an example
+   using Logger.
+
+   I recommend putting new modules in ~/.ipredkoll/lib and require them
+   in your config file and putting the name of the class in the
+   config.notifiers array.
+
+A sample configuration file can be found in the etc folder.
+
+If you want to get in touch with me you can write me at ba@sanitarium.se or
+find me on irc.piratpartiet.se user ba.

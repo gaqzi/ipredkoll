@@ -1,0 +1,37 @@
+= Om =
+Det här är ett program som är gjort att fungera som ett komplement till
+ipredkoll.se och specifikt genom att logga de IP-adresserna du använder
+för att ansluta med till internet. Det för att om Maafian kommer och vill
+begära ut information om just ditt IP så ska du kunna få en varning, även om
+du är en foliehat. :)
+
+Just nu så är det här en ALPHA, det kan krascha oväntat och viktigast
+är att det saknas en funktion att hämta vilka adresser som undersöks
+från ipredkoll.se.
+
+Programmet är från början tänkt att vara lätt att bygga ut och göra egna
+sorters notifieringar, så länge man kan Ruby dvs.
+
+Om du vill komma i kontakt med mej så kan du skicka ett e-post till
+ba@sanitarium.se eller så kan du hitta mej på irc.piratpartiet.se nick ba.
+
+= Hur programmet arbetar =
+Var 15:e minut så försöker det ta reda på vad du har för IP-adress, om du
+sitter NAT:ad så kommer den att använda en extern tjänst, myip.dk, för att
+ta reda på ditt IP. Förslag på bättre lösningar mottages tacksamt! :)
+
+Om det IP:t du har nu inte har någon öppen post i database så stänger den
+eventuellt öppna poster med datum och tid och öppnar därefter en ny post
+med det nuvarande IP:t.
+
+Om ditt IP, och tid, matchar något från ipredkoll.se så kommer en varning
+skickas via de notifiers du har aktiverat. I nuläget finns bara en men det
+kommer att komma fler.
+
+= Utöka med egna notifiers =
+För att utöka med en egen notifier så behöver du bara skriva en klass under
+modulerna IPREDkoll::Notifiers. För ett exempel på en enkel notifier så se
+notifier.rb och Logger.
+
+Därefter så behöver du bara ladda den i din config.rb och lägga till
+klassnamnet i arrayen config.notifiers så kommer den anropas.
