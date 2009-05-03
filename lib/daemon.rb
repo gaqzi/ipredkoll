@@ -16,11 +16,21 @@ module IPREDkoll
     end
 
     def check
+      ip = IPLookup.my_ip
+
+      if ip.nil?
+        Config.logger.info "Not connected to the Internet. Will retry later..."
+        return false
+      end
+
       DB.new do |db|
-        db.mark_ip(IPLookup.my_ip)
-        db.any_ip_under_inspection?.each do |row|
+        Config.logger.debug "Marking IP: #{ip}"
+        db.mark_ip(ip)
+        db.any_ip_under_inspection?.each do |data|
+          Config.logger.debug "IP: #{data['ip']} is under inspection! #{data.inspect}"
+
           changed
-          notify_observers(row)
+          notify_observers(data)
         end
       end
     end

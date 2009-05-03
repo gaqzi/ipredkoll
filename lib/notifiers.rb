@@ -1,6 +1,19 @@
 module IPREDkoll
+  # The notifiers has to follow these two rules which are set by the built-in
+  # +Observable+ module:
+  # * The +initialize+ method can only take one argument which is the object
+  #   that we're going to add our self as an observer to by: +obj.add_observer(self)+
+  # * An +update+ method which takes one argument, which is the hash described below.
+  #   Apart from that you are free to make as many methods as you want.
+  #
   # The hash passed into the +update+ method contains these keys:
-  # ip, start_time, end_time, last_seen, time_active, case_number, url
+  # ip::
+  # start_time::  The first time that IP was seen
+  # end_time::    The time we got a new IP
+  # last_seen::   Last time we had an active report of that IP
+  # time_active:: The date/time that IP was in use in an IPRED-case
+  # case_number::
+  # url::         An URL with more information at ipredkoll.se
   #
   module Notifiers
     class Logger
@@ -21,6 +34,7 @@ module IPREDkoll
       end
     end # End Logger
 
+    # --
     # To be implemented
     #
     # class Email

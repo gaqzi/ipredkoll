@@ -3,6 +3,8 @@ require 'logger'
 
 module IPREDkoll
   module Configuration
+    module_function
+
     def load(configuration_file = nil)
       config = OpenStruct.new
       config.basedir         = File.join(ENV['HOME'], '.ipredkoll')
@@ -31,6 +33,5 @@ module IPREDkoll
 
       return config
     end
-    module_function :load
   end
 end

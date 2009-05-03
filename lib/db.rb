@@ -45,12 +45,11 @@ module IPREDkoll
                         FROM my_ips_under_inspection')
     end
 
-    def self.create_database
-      DB.new do |db|
-        db.create_db
-      end
+    def mark_ip_as_notified(ip)
+      @@db.execute('UPDATE ipredkoll_ips SET notified = 1 WHERE ip = ?', ip)
     end
 
+    private
     def create_database
       @@db.execute_batch("
         CREATE TABLE ips (
