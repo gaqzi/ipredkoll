@@ -5,14 +5,28 @@ module IPREDkoll
     include Observable
 
     def initialize
+      Config.logger.debug "Entering initialize"
+
       Config.notifiers.each do |notifier|
+        Config.logger.debug "Trying to add notifier: #{notifier}"
         IPREDkoll::Notifiers.const_get(notifier).new(self)
       end
 
-      loop do
-        check()
-        sleep(15 * 60)
+      Config.logger.debug "Notifiers has been added and main loop is starting..."
+
+      if block_given?
+        yield self
+      else
+        loop do
+          Config.logger.debug "In main loop"
+          check()
+          sleep()
+        end
       end
+    end
+
+    def sleep
+      Kernel.sleep(15 * 60)
     end
 
     def check

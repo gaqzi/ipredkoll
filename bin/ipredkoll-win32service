@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+$KCODE = 'u'
+
+require 'rubygems'
+
+if RUBY_PLATFORM.match(/mswin32/)
+  require 'win32/service'
+  require 'rbconfig'
+
+  include Win32
+
+  unless Service.exists? 'ipredkoll'
+    cmd = File.join(Config::CONFIG['bindir'], 'ruby')
+    cmd += ' "' + File.join(File.dirname(File.expand_path(__FILE__)), 'ipredkoll') + '"'
+    cmd = cmd.tr('/', '\\')
+
+    puts cmd
+
+    Service.new('ipredkoll', nil,
+                'display_name'     => 'ipredkoll',
+                'binary_path_name' => cmd,
+                'start_type'       => Service::AUTO_START)
+
+    if Service.status('ipredkoll').current_state != 'running'
+      Service.start('ipredkoll')
+    end
+  end
+else
+  STDERR.puts "You're not running Win32 so this isn't useful for you"
+end

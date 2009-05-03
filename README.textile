@@ -16,15 +16,22 @@ sorters notifieringar, så länge man kan Ruby dvs.
 Om du vill komma i kontakt med mej så kan du skicka ett e-post till
 ba@sanitarium.se eller så kan du hitta mej på irc.piratpartiet.se nick ba.
 
-h2. Deps
+Buggar och/eller förslag på förbättringar kan ni lämna i
+"Issue trackern.":http://github.com/ba/ipredkoll/issues
 
-Det här är skrivet med Ruby och använder några olika gems för utökning, då
-främst amalgalite för att få in SQLite3-databas enkelt eftersom målet är
-att kunna fixa i ordning en lättinstallerbar version till Windows.
+h2. Installationsinstruktioner
 
-För att kunna köra det här så kan du köra följande kommando för att tanka
-och installera alla gems:
-  @gem install amalgalite daemons arrayfields@
+Det här är skrivet med Ruby och använder några olika
+"gems":http://rubygems.org/ för utökning, då främst amalgalite för att
+få in SQLite3-databas enkelt eftersom målet är att kunna fixa i
+ordning en lättinstallerbar version till Windows.
+
+Installationsinstruktioner finns "i wikin":http://wiki.github.com/ba/ipredkoll
+
+För tillfället har jag testat att köra det här i:
+* Windows
+* Linux
+* Mac OS X
 
 h2. Hur programmet arbetar
 

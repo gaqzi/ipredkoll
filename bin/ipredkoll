@@ -2,13 +2,46 @@
 # -*- coding: utf-8 -*-
 $KCODE = 'u'
 
-$:.unshift(File.join(File.dirname(__FILE__), '..'))
 require 'rubygems'
-require 'daemons'
+require 'pp'
 
+$:.unshift(File.join(File.dirname(__FILE__), '..'))
 ['configuration', 'ip', 'daemon', 'db', 'notifiers'].each {|x| require File.join('lib', x) }
 
-Daemons.run_proc('ipredkoll') do
-  IPREDkoll::Config = IPREDkoll::Configuration.load
-  IPREDkoll::Daemon.new
+if RUBY_PLATFORM.match(/mswin32/)
+  require 'win32/daemon'
+  include Win32
+
+  # I really don't know how to pass this in nicely =/
+  $app_dir = File.join(File.dirname(File.expand_path(__FILE__)), '..')
+
+  class Win32Daemon < Daemon
+    def service_init
+      IPREDkoll.const_set('Config', IPREDkoll::Configuration.load(:app_dir => $app_dir.dup))
+      $app_dir = nil # Hoping this kills it quickly and doesn't litter the namespace
+      IPREDkoll::Config.logger.debug '--- Starting Windows Service ---'
+      IPREDkoll::Config.logger.debug 'In service_init'
+    end
+
+    def service_main(*args)
+      IPREDkoll::Config.logger.debug "Just entered service_main #{args.join(',')}"
+      IPREDkoll::Daemon.new
+    end
+
+    def service_stop
+      exit!
+    end
+  end
+
+  Win32Daemon.mainloop
+else # Linux, BSD, darwin (mac os x)
+  require 'daemons'
+  app_dir = File.join(File.dirname(File.expand_path(__FILE__)), '..')
+
+  Daemons.run_proc('ipredkoll') do
+    IPREDkoll::Config = IPREDkoll::Configuration.load(:app_dir => app_dir)
+    IPREDkoll::Config.logger.debug '--- Starting POSIX Service ---'
+
+    IPREDkoll::Daemon.new
+  end
 end
