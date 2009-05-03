@@ -29,3 +29,5 @@ if RUBY_PLATFORM.match(/mswin32/)
 else
   STDERR.puts "You're not running Win32 so this isn't useful for you"
 end
+
+
