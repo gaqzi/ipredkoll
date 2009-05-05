@@ -1,8 +1,9 @@
+@ECHO OFF
 ruby ../bin/ipredkoll-win32service
 
-echo Nu har tj„nsten f”rhoppningsvis blivit registrerad.
-echo Du har mest troligt f†tt ett felmeddelande fr†n Windows tj„nsthanterare.
-echo Det „r f”r att det inte finns n†gon konfigfil vald, bara att kopiera
+echo Nu har tjï¿½nsten fï¿½rhoppningsvis blivit registrerad.
+echo Du har mest troligt fï¿½tt ett felmeddelande frï¿½n Windows tjï¿½nsthanterare.
+echo Det ï¿½r fï¿½r att det inte finns nï¿½gon konfigfil vald, bara att kopiera
 echo exempelfilen i etc-mappen.
 pause
 
